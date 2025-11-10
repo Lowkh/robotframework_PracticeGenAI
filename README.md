@@ -367,6 +367,92 @@ pip install --upgrade robotframework-seleniumlibrary
 
 ---
 
+## Practice Exercise
+
+**Objective:** Apply foundational Robot Framework concepts by testing key elements on the Toyster.sg homepage.
+
+### Exercise: Verify Homepage Content on Toyster.sg
+
+Create a test to check that the Toyster.sg homepage loads successfully and verify the presence of at least three visible elements or sections relevant to users.
+
+#### Create a file: `tests/toyster_homepage_test.robot`
+
+**Requirements:**
+
+1. **Define variables** in the `*** Variables ***` section:
+   - `${TARGET_URL}` with value `https://toyster.sg`
+   - `${BROWSER}` with value `Chrome`
+
+2. **Create a test case:** `Verify Toyster Homepage Loads`
+   - Opens browser to `${TARGET_URL}`
+   - Maximizes the browser window
+   - Waits up to 10 seconds for the page to finish loading
+   - Checks that the page title contains `"TOYSTER"` (or the appropriate branding found on the site)
+   - Verifies at least three visible homepage elements using locators such as:
+     - A prominent search bar
+     - Any featured product section (e.g., "Best Selling", "Learning Toys", "Shop Online")
+     - Main navigation menu or logo
+   - Logs a message for each element verified: e.g., "Search bar is present"
+   - Closes the browser at the end
+
+**Hints:**
+- Use `Library    SeleniumLibrary` in your test file
+- Use keywords such as `Open Browser`, `Maximize Browser Window`, `Get Title`, `Element Should Be Visible`, and `Log`
+- You can inspect Toyster.sg homepage using Chrome DevTools (`Ctrl+Shift+I`) to find element locators (e.g., CSS selectors or IDs) for essential sections
+- Example locators to try:
+  - Logo/Header: `xpath://div[@class='site-header']` or look for brand elements
+  - Search bar: `xpath://input[@placeholder='Search']` or `css:.searchbox`
+  - Navigation menu: `xpath://nav` or `css:.navbar`
+  - Featured products: `xpath://section[@class='products']` or similar
+- Update locators based on what you find in the actual Toyster.sg HTML structure
+
+#### Example starting template:
+
+```robotframework
+*** Settings ***
+Documentation    Verify Toyster.sg homepage loads and key elements are present
+Library          SeleniumLibrary
+
+*** Variables ***
+${TARGET_URL}    https://toyster.sg
+${BROWSER}       Chrome
+
+*** Test Cases ***
+Verify Toyster Homepage Loads
+    Open Browser    ${TARGET_URL}    ${BROWSER}
+    Maximize Browser Window
+    Wait Until Page Contains Element    xpath://body    10s
+    ${title}=    Get Title
+    Should Contain    ${title}    TOYSTER
+    Log    Page title contains TOYSTER
+    Element Should Be Visible    xpath://nav
+    Log    Navigation menu is present
+    Element Should Be Visible    xpath://input
+    Log    Search bar is present
+    Element Should Be Visible    xpath://section[@class='products']
+    Log    Product section is present
+    Close Browser
+```
+
+**Success Criteria:**
+- The test successfully opens and loads the Toyster.sg homepage
+- The page title validation passes (contains "TOYSTER")
+- All three elements are found and verified as visible, with appropriate log messages
+- The test closes the browser cleanly
+- The test run shows all steps as PASS in Robot Framework report (`report.html`)
+- You have used variables and clear documentation following naming conventions from this practical
+
+**To run your test:**
+```
+robot --outputdir results tests/toyster_homepage_test.robot
+```
+
+Open `results/report.html` and confirm all checks passed.
+
+**Tip:** You may need to update the element locators by inspecting the actual Toyster.sg website using Chrome DevTools. Right-click on page elements and select "Inspect" to find the correct CSS selectors or XPath expressions for navigation, search, and product sections.
+
+---
+
 ## Next Steps
 
 Congratulations! You've completed the Robot Framework beginner practical. Here's what you can explore next:
