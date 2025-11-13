@@ -252,8 +252,8 @@ Documentation    Basic web testing example
 Library          SeleniumLibrary
 
 *** Variables ***
-${URL}           https://www.google.com
-${BROWSER}       Chrome
+${URL}           https://www.np.edu.sg
+${BROWSER}       Edge
 
 *** Test Cases ***
 Open Google Homepage
