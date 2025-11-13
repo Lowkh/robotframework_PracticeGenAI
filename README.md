@@ -137,7 +137,7 @@ My First Test
 ### Running from VS Code
 
 1. Right-click anywhere in the `first_test.robot` file
-2. Select **Robot Framework: Run Test**
+2. Select **Run Code**
 3. Watch the output in the Terminal at the bottom
 
 **Alternative Method:**
